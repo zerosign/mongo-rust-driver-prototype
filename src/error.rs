@@ -43,7 +43,7 @@ pub enum Error {
     /// An ObjectId could not be generated.
     OIDError(oid::Error),
     /// A hexadecimal string could not be converted to bytes.
-    FromHexError(data_encoding::decode::Error),
+    FromHexError(data_encoding::DecodeError),
     /// A single-write operation failed.
     WriteError(WriteException),
     /// A bulk-write operation failed due to one or more lower-level write-related errors.
@@ -121,8 +121,8 @@ impl From<oid::Error> for Error {
     }
 }
 
-impl From<data_encoding::decode::Error> for Error {
-    fn from(err: data_encoding::decode::Error) -> Error {
+impl From<data_encoding::DecodeError> for Error {
+    fn from(err: data_encoding::DecodeError) -> Error {
         Error::FromHexError(err)
     }
 }
